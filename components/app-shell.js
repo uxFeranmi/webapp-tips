@@ -3,18 +3,18 @@ import Head from 'next/head';
 import styles from '../styles/app-shell.module.scss';
 
 const AppShell = (props)=> {
-  return <>
-    <Head key={'Site-wide <head> content'}>
-      <title>Web App Tips</title>
-    </Head>
+	return <>
+		<Head key={'Site-wide <head> content'}>
+			<title>Web App Tips</title>
+		</Head>
 
-    <header key={'Titlebar'} className={styles['site-header']}>
-      <h1 className={styles['page-title']}>
-        <Link href="/">
-          <a>Web App Tips</a>
-        </Link>
-      </h1>
-    </header>
+		<header key={'Titlebar'} className={styles['site-header']}>
+			<h1 className={styles['page-title']}>
+				<Link href="/">
+					<a>Web App Tips</a>
+				</Link>
+			</h1>
+		</header>
 
 		<main key={'Main content'} className={styles['main-content']}>
 			{props.children}
