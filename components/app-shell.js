@@ -22,10 +22,23 @@ const AppShell = (props)=> {
 
 		<footer key={'Site footer'} className={styles['site-footer']}>
 			<address>
-				<a href="https://twitter.com/uxFeranmi" title="Find me on Twitter"
-						target="_blank" rel="noopener noreferrer">
-					Twitter
-				</a> &nbsp;
+				{/* <p>
+					Designed and developed
+					by <a href="https://feranmi.dev" target="_blank" rel="noopener noreferrer">
+						Feranmi Akinlade
+					</a>.
+				</p>
+				<p>
+					<small>
+						All articles authored by Feranmi Akinlade.
+					</small>
+				</p> */}
+				<p>
+					All articles authored
+					by <a href="https://feranmi.dev" target="_blank" rel="noopener noreferrer">
+						Feranmi Akinlade
+					</a>.
+				</p>
 			</address>
 		</footer>
 	</>
