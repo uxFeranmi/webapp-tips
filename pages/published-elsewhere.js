@@ -3,7 +3,7 @@ import styles from '../styles/published-elsewhere.module.scss';
 export default function MyExternalArticles() {
   return <>
     <div className={styles.section}>
-      <h2>Published elsewhere</h2>
+      <h2>Published Elsewhere</h2>
       <p>
         Articles I've written that are published on other platforms.
       </p>
@@ -12,10 +12,10 @@ export default function MyExternalArticles() {
     <article className={styles.section}>
       <h3 className={styles.h3}>
         <a href="https://medium.com/buycoins/the-how-and-why-of-keyboard-accessibility-4795a83c899b">
-          The How and Why of Keyboard Accessibility
+          <span>The How and Why of Keyboard Accessibility</span>
+          <br/>
+          <small>Improving Keyboard Accessibility for Web Apps — Part 1</small>
         </a>
-        <br/>
-        <small>Improving Keyboard Accessibility for Web Apps — Part 1</small>
       </h3>
       <p>
         About 15% of the world’s population have some form of disability. That’s over 1 billion people!
@@ -31,10 +31,10 @@ export default function MyExternalArticles() {
     <article className={styles.section}>
       <h3 className={styles.h3}>
         <a href="https://medium.com/buycoins/use-semantic-html-8b2d4079ff7f">
-          Use Semantic HTML
+          <span>Use Semantic HTML</span>
+          <br/>
+          <small>Improving Keyboard Accessibility for Web Apps — Part 2</small>
         </a>
-        <br/>
-        <small>Improving Keyboard Accessibility for Web Apps — Part 2</small>
       </h3>
       <p>
         Different HTML tags exist for specific purposes,
@@ -54,7 +54,7 @@ export default function MyExternalArticles() {
     <article className={styles.section}>
       <h3 className={styles.h3}>
         <a href="https://dev.to/uxferanmi/sassy-bem-2jlj">
-          Styling components with BEM and SCSS
+          <span>Styling components with BEM and SCSS</span>
         </a>
       </h3>
       <p>
