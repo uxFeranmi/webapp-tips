@@ -1,0 +1,5 @@
+{
+	"ignore": ["./utils/client"],
+	"watch": ["./index.js", "./utils"],
+	"ext": "js, ts, jsx, tsx, json"
+}
