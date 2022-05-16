@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 		git.pull();
 		console.log(git.getBranchName());
 
-		// Get list of changed files
+		// Get list of changed files;
 		const lastPublishedCommitHash = ''; // Fetch from DB
 		const hashOfLastCommit = await git.getHashOfLastCommit('branch-name');
 		const timeOfLastCommit = await git.getTimeOfLastCommit('branch-name');
