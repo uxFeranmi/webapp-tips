@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
 		// Call git pull on the content repo
 		git.clone('https://username:PERSONAL_ACCESS_TOKEN@github.com/username/project.git');
-		git.pull('https://username:PERSONAL_ACCESS_TOKEN@github.com/username/project.git');
+		git.pull();
 		console.log(git.getBranchName());
 
 		// Get list of changed files
