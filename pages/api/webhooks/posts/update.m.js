@@ -1,15 +1,48 @@
 // import { getSendcashStatus } from '@/services/server/sendcash-status';
+const { Git } = require('git-interface');
+const path = require('path');
 
+const git = new Git({
+	dir: path.join(process.cwd(), '/content-repo'),
+});
 
 export default async function handler(req, res) {
 	try {
 		// const status = await getSendcashStatus(req);
 
-		// Check auth token to verify request is from known source
+		if (req.headers['server-id'] !== process.env.CONTENT_SERVER_ID) {
+			throw new ServerError('', 403);
+		}
+
 		// Call git pull on the content repo
+		git.clone();
+		git.pull();
+		console.log(git.getBranchName());
+
 		// Get list of changed files
-		// Compile changed files, rendering to static html, (and update relevant db records)
-		// Trigger update of edge cache on cloudflare
+		const lastPublishedCommitHash = ''; // Fetch from DB
+		const hashOfLastCommit = await git.getHashOfLastCommit('branch-name');
+		const timeOfLastCommit = await git.getTimeOfLastCommit('branch-name');
+
+		if (hashOfLastCommit === lastPublishedCommitHash) {
+			throw new ServerError('Latest commit already published.', 204, true);
+		}
+
+		if (timeOfLastCommit < lastPublishedCommitHash) {
+			const message = 'Received new commit that predates an already published commit';
+			throw new ServerError(message, 500, true);
+		}
+
+		const diffFileList = await git.getDiffByRevisionFileList(lastPublishedCommitHash);
+		console.log(diffFileList);
+		diffFileList.forEach((file) => {
+			// Compile changed files, rendering to static html, (and update relevant db records)
+			// Trigger update of edge cache on cloudflare
+			// Handle deleted file. Unpublish the post.
+			processUpdatedBlogPost(file);
+		});
+
+		setLastPublishedCommitHash(hashOfLastCommit, Date.now());
 
 		res.status(200);
 	} catch (error) {
