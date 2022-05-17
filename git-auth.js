@@ -8,12 +8,13 @@
 const { execSync, spawn } = require('child_process');
 const path = require('path');
 
-// const repoLocation = path.join(process.cwd(), '/content-repo');
-const repoLocation = process.cwd();
+const repoLocation = path.join(process.cwd(), 'webapp-tips');
+// const repoLocation = process.cwd();
 console.log({ repoLocation });
 
 module.exports = (initCommand) => new Promise((resolve, reject) => {
 	// git config --local --add credential.helper B
+	execSync("git init webapp-tips", { cwd: process.cwd(), stdio: 'inherit' });
 	execSync("git config --local credential.helper ''", { cwd: repoLocation, stdio: 'inherit' });
 	// execSync("git config --local --add credential.helper 'cache --timeout=900'", { cwd: repoLocation, stdio: 'inherit' });
 	console.log('Called git credential helper.');
