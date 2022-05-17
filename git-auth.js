@@ -8,7 +8,9 @@
 const { execSync, spawn } = require('child_process');
 const path = require('path');
 
-const repoLocation = path.join(process.cwd(), '/content-repo');
+// const repoLocation = path.join(process.cwd(), '/content-repo');
+const repoLocation = process.cwd();
+console.log({ repoLocation });
 
 module.exports = (initCommand) => new Promise((resolve, reject) => {
 	// execSync('git config --local credential.helper cache', { cwd: repoLocation, stdio: 'inherit' });
@@ -17,7 +19,7 @@ module.exports = (initCommand) => new Promise((resolve, reject) => {
 
 	const { GITHUB_USERNAME, GITHUB_ACCESS_TOKEN } = process.env;
 
-	const childProcess = spawn(initCommand, { cwd: repoLocation });
+	const childProcess = spawn(initCommand, [], { shell: true, cwd: repoLocation });
 	console.log(`Running init command: ${initCommand}`);
 
 	// Start by simply writing some input since the prompts aren't captured by stdout

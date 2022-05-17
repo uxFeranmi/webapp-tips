@@ -4,7 +4,8 @@ const path = require('path');
 const gitAuth = require('./git-auth');
 
 const git = new Git({
-	dir: path.join(process.cwd(), '/content-repo'),
+	// dir: path.join(process.cwd(), '/content-repo'),
+	dir: process.cwd(),
 });
 
 export default async function handler(req, res) {
