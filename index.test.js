@@ -17,7 +17,7 @@ execSync("git --version", { stdio: 'inherit' });
 // execSync("git config --local --unset credential.helper", { cwd: process.cwd(), stdio: 'inherit' });
 
 const { GITHUB_USERNAME } = process.env;
-const githubRepoUrl = `https://uxFeranmi@github.com/${GITHUB_USERNAME}/webapp-tips-content.git`;
+const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/webapp-tips-content.git`;
 // const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/fake-repo.git`;
 gitAuth(`git clone --progress --single-branch ${githubRepoUrl}`)
 	.then(() => execSync("ls webapp-tips-content", { stdio: 'inherit' }))
