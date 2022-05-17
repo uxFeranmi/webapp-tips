@@ -1,26 +1,21 @@
 // import { getSendcashStatus } from '@/services/server/sendcash-status';
 const { Git } = require('git-interface');
 const path = require('path');
-const gitAuth = require('./git-auth');
-
-const git = new Git({
-	// dir: path.join(process.cwd(), '/content-repo'),
-	dir: process.cwd(),
-});
 
 export default async function handler(req, res) {
 	try {
 		// const status = await getSendcashStatus(req);
 
-		if (req.headers['server-id'] !== process.env.CONTENT_SERVER_ID) {
+		if (req.headers['remote-id'] !== process.env.CONTENT_REPO_REMOTE_ID) {
 			throw new ServerError('', 403);
 		}
 
-		const { GITHUB_USERNAME } = process.env;
-		// const githubRepoUrl = `https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/webapp-tips.git`;
-		const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/webapp-tips.git`;
-		gitAuth(`git clone ${githubRepoUrl}`);
-		gitAuth('git pull');
+		const { CONTENT_REPO_NAME } = process.env;
+		const git = new Git({
+			dir: path.join(process.cwd(), CONTENT_REPO_NAME),
+		});
+		git.pull();
+
 		console.log(git.getBranchName());
 
 		// Get list of changed files
@@ -54,3 +49,8 @@ export default async function handler(req, res) {
 		res.status(error.status || 500).json({ message: errorMessage });
 	}
 }
+
+
+// With github api:
+// Request list of files changes since lastPublishedCommit.
+// For each item in list, request file content and process it.

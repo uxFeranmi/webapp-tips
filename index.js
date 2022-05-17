@@ -5,6 +5,7 @@ const express = require('express');
 
 const path = require('path');
 const url = require('url');
+const { execSync } = require('child_process');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
@@ -121,5 +122,16 @@ nextApp.prepare().then(() => {
 
 	app.use(require('./utils/server/middleware/error'));
 
-	app.listen(port, () => console.log(`WA.T app listening on port ${port}!`));
+	app.listen(port, () => {
+		console.log(`WA.T app listening on port ${port}!`);
+
+		console.log(`Initializing content repo...`);
+		const { GITHUB_USERNAME, GITHUB_ACCESS_TOKEN, CONTENT_REPO_NAME } = process.env;
+		const githubRepoUrl = `https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/${CONTENT_REPO_NAME}.git`;
+
+		// if (repoExists) git.pull();
+		// else
+		execSync(`git clone --progress --single-branch ${githubRepoUrl}`, { stdio: 'inherit' });
+		// (new Git({})).clone(githubRepoUrl, CONTENT_REPO_NAME);
+	});
 });
