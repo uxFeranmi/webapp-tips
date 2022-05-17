@@ -1,6 +1,6 @@
 // require('dotenv').config();
 
-const gitAuth = require('./git-auth');
+// const gitAuth = require('./git-auth');
 const { execSync } = require('child_process');
 
 console.log({ platform: process.platform });
@@ -16,12 +16,10 @@ execSync("git --version", { stdio: 'inherit' });
 // console.log("> git config --local --unset credential.helper");
 // execSync("git config --local --unset credential.helper", { cwd: process.cwd(), stdio: 'inherit' });
 
-const { GITHUB_USERNAME } = process.env;
-const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/webapp-tips-content.git`;
-// const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/fake-repo.git`;
-gitAuth(`git clone --progress --single-branch ${githubRepoUrl}`)
-	.then(() => execSync("ls webapp-tips-content", { stdio: 'inherit' }))
-	.catch(() => {});
-// gitAuth(`git --version`);
-// gitAuth(`which git`);
-// git clone --progress --single-branch https://github.com/uxFeranmi/webapp-tips-content.git
+const { GITHUB_USERNAME, GITHUB_ACCESS_TOKEN } = process.env;
+const githubRepoUrl = `https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/webapp-tips-content.git`;
+
+execSync(`git clone --progress --single-branch ${githubRepoUrl}`, { stdio: 'inherit' })
+execSync("ls webapp-tips-content", { stdio: 'inherit' });
+
+// execSync(`which git`);
