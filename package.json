@@ -4,10 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js --config ./nodemon.json",
-    "build.bak": "next build",
-    "build": "echo 'Build command called.'",
-    "start.bak": "node index.js",
-    "start": "node index.test.js",
+    "build": "next build",
+    "start": "node index.js",
     "next:dev": "next",
     "next:start": "next start --port $PORT"
   },
