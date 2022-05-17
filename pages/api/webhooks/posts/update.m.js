@@ -14,12 +14,14 @@ export default async function handler(req, res) {
 			throw new ServerError('', 403);
 		}
 
-		// Call git pull on the content repo
-		git.clone('https://username:PERSONAL_ACCESS_TOKEN@github.com/username/project.git');
-		git.pull();
+		const { GITHUB_USERNAME } = process.env;
+		// const githubRepoUrl = `https://${GITHUB_USERNAME}:${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_USERNAME}/webapp-tips.git`;
+		const githubRepoUrl = `https://github.com/${GITHUB_USERNAME}/webapp-tips.git`;
+		gitAuth(`git clone ${githubRepoUrl}`);
+		gitAuth('git pull');
 		console.log(git.getBranchName());
 
-		// Get list of changed files;
+		// Get list of changed files
 		const lastPublishedCommitHash = ''; // Fetch from DB
 		const hashOfLastCommit = await git.getHashOfLastCommit('branch-name');
 		const timeOfLastCommit = await git.getTimeOfLastCommit('branch-name');
