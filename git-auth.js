@@ -14,13 +14,13 @@ console.log({ repoLocation });
 
 module.exports = (initCommand) => new Promise((resolve, reject) => {
 	// execSync('git config --local credential.helper cache', { cwd: repoLocation, stdio: 'inherit' });
-	execSync("git config --local credential.helper 'cache --timeout=900'", { cwd: repoLocation, stdio: 'inherit' });
-	console.log('Called git credential helper.');
+	// execSync("git config --local credential.helper 'cache --timeout=900'", { cwd: repoLocation, stdio: 'inherit' });
+	// console.log('Called git credential helper.');
 
 	const { GITHUB_USERNAME, GITHUB_ACCESS_TOKEN } = process.env;
 
-	const childProcess = spawn(initCommand, [], { shell: true, cwd: repoLocation });
 	console.log(`Running init command: ${initCommand}`);
+	const childProcess = spawn(initCommand, [], { shell: true, cwd: repoLocation });
 
 	// Start by simply writing some input since the prompts aren't captured by stdout
 	// We have to use a manual delay to wait for each prompt, since we cannot detect when the child process is ready for input.
