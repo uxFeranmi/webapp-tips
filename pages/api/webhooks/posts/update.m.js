@@ -1,6 +1,7 @@
 // import { getSendcashStatus } from '@/services/server/sendcash-status';
 const { Git } = require('git-interface');
 const path = require('path');
+const gitAuth = require('./git-auth');
 
 const git = new Git({
 	dir: path.join(process.cwd(), '/content-repo'),
