@@ -8,9 +8,9 @@ console.log("> git --version");
 execSync("git --version", { stdio: 'inherit' });
 
 console.log("> git config credential.helper");
-execSync("git config credential.helper", { stdio: 'inherit' });
+execSync("git config --local credential.helper", { stdio: 'inherit' });
 
-console.log("> git config --unset credential.helper");
+console.log("> git config --local --unset credential.helper");
 execSync("git config --unset credential.helper", { stdio: 'inherit' });
 
 const { GITHUB_USERNAME } = process.env;
