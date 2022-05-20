@@ -49,8 +49,3 @@ export default async function handler(req, res) {
 		res.status(error.status || 500).json({ message: errorMessage });
 	}
 }
-
-
-// With github api:
-// Request list of files changes since lastPublishedCommit.
-// For each item in list, request file content and process it.
