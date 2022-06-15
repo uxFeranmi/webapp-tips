@@ -1,11 +1,8 @@
-// import { getSendcashStatus } from '@/services/server/sendcash-status';
 const { Git } = require('git-interface');
 const path = require('path');
 
 export default async function handler(req, res) {
 	try {
-		// const status = await getSendcashStatus(req);
-
 		if (req.headers['remote-id'] !== process.env.CONTENT_REPO_REMOTE_ID) {
 			throw new ServerError('', 403);
 		}
